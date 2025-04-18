@@ -24,23 +24,28 @@ class Card:
 
 class Deck:
 
+    '''
+    Creates a deck, shuffles deack, then deals cards.
+    '''
+
     def __init__(self):
         
-        self.all_cards = []
+        self.deck = []
 
         for suit in suits:
             for rank in ranks:
                 created_card = Card(suit,rank)
-                self.all_cards.append(created_card)
-
-    def __str__(self):
-        pass
+                self.deck.append(created_card)
 
     def shuffle(self):
-        pass
+        '''
+        Shuffles the deck.
+        '''
+        
+        random.shuffle(self.deck)
 
     def deal(self):
-        pass
+        return self.deck.pop()
 
 class Hand:
 
