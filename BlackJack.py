@@ -20,7 +20,7 @@ class Card:
         self.values = values[ranks]
 
     def __str__(self):
-        pass
+        return self.ranks + " of " + self.suits
 
 class Deck:
 
