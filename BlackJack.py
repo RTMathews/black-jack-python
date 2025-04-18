@@ -2,7 +2,7 @@ import random
 
 suits = ("Hearts", "Diamonds", "Spades", "Clubs")
 
-rank = ("Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+ranks = ("Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
           "Jack", "Queen", "King", "Ace")
 
 values = {"Two":2, "Three":3, "Four":4, "Five":5, "Six":6, "Seven":7, "Eight":8, "Nine":9, "Ten":10,
@@ -13,14 +13,14 @@ class Card:
     Gives a card all of its characteristics.
     '''
 
-    def __init__(self, suits, rank, values):
+    def __init__(self, suits, ranks, values):
 
         self.suits = suits
-        self.rank = rank
-        self.values = values[rank]
+        self.ranks = ranks
+        self.values = values[ranks]
 
     def __str__(self):
-        return self.rank + " of " + self.suits
+        return self.ranks + " of " + self.suits
 
 class Deck:
 
@@ -28,6 +28,10 @@ class Deck:
         
         self.all_cards = []
 
+        for suit in suits:
+            for rank in ranks:
+                created_card = Card(suit, rank)
+                self.all_cards.append(created_card)
 
     def __str__(self):
         pass
