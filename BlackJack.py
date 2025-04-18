@@ -13,14 +13,14 @@ class Card:
     Gives a card all of its characteristics.
     '''
 
-    def __init__(self, suits, ranks, values):
+    def __init__(self, suit, rank):
 
-        self.suits = suits
-        self.ranks = ranks
-        self.values = values[ranks]
+        self.suit = suit
+        self.rank = rank
+        self.values = values[rank]
 
     def __str__(self):
-        return self.ranks + " of " + self.suits
+        return self.rank + " of " + self.suit
 
 class Deck:
 
@@ -30,7 +30,7 @@ class Deck:
 
         for suit in suits:
             for rank in ranks:
-                created_card = Card(suit, rank)
+                created_card = Card(suit,rank)
                 self.all_cards.append(created_card)
 
     def __str__(self):
