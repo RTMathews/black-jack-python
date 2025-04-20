@@ -17,10 +17,10 @@ class Card:
 
         self.suit = suit
         self.rank = rank
-        self.values = values[rank]
+        self.value = values[rank]
 
     def __str__(self):
-        return self.rank + " of " + self.suit
+        return f"{self.rank} of {self.suit}"
 
 class Deck:
 
@@ -30,8 +30,10 @@ class Deck:
 
     def __init__(self):
         
+        #Create empty deck.
         self.deck = []
 
+        #Create and add card objects to deck.
         for suit in suits:
             for rank in ranks:
                 created_card = Card(suit,rank)
@@ -45,18 +47,45 @@ class Deck:
         random.shuffle(self.deck)
 
     def deal(self):
-        return self.deck.pop()
+        '''
+        Deals a card.
+        '''
+        
+        return self.deck.pop(0)
 
 class Hand:
+    '''
+    Shows which cards are in a player's hand, the value they add up to, and if they have any aces.
+    '''
 
     def __init__(self):
-        pass
+        self.cards = []
+        self.value = 0
+        self.aces = 0
 
-    def add_card(self):
-        pass
-    
+    def add_card(self,card):
+        '''
+        Adds a card to the player's hand.
+        '''
+        
+        self.cards.append(card)
+
+    def sum_cards(self):
+        """
+        Gets the sum of all cards.
+        """
+
+        
+
     def adjust_for_ace(self):
-        pass
+        '''
+        Adjusts value of aces depending on total value of cards in hand.
+        '''
+        
+
+
+    def __str__(self):
+        return f"{len(self.cards)}"
 
 class Chips:
 
@@ -68,3 +97,10 @@ class Chips:
 
     def lose_bet(self):
         pass
+
+testhand = Hand()
+testdeck = Deck()
+
+testhand.add_card(testdeck.deal())
+
+print(testhand)
