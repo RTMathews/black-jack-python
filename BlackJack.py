@@ -119,8 +119,11 @@ def take_bet():
     '''
     Asks a player to enter a whole number less than or equal to their total.
     '''
-
-    try:
-        bet = int(input("How much do you want to bet? : "))
-    except:
-        print("Must enter a whole number within range of your total chips. ")
+    
+    while True:
+        try:
+            Chips().bet = int(input("How much do you want to bet? : "))
+            if Chips().bet <= Chips().total:
+                break
+        except:
+            print("Must enter a whole number within range of your total chips. ")
