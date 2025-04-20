@@ -70,6 +70,9 @@ class Hand:
         
         self.cards.append(card)
 
+    def sum_cards(self):
+        pass
+
     def adjust_for_ace(self):
         '''
         Adjusts value of aces depending on total value of cards in hand.
@@ -79,7 +82,7 @@ class Hand:
 
     def __str__(self):
 
-        return f"{self.value}"
+        return f"{self.cards[0].value}"
 
 class Chips:
 
@@ -97,6 +100,5 @@ testdeck = Deck()
 testdeck.shuffle()
 
 testhand.add_card(testdeck.deal())
-testhand.sum_cards()
 
 print(testhand)
