@@ -59,45 +59,68 @@ class Hand:
     '''
 
     def __init__(self):
+
         self.cards = []
         self.value = 0
         self.aces = 0
 
     def add_card(self,card):
         '''
-        Adds a card to the player's hand.
+        Adds a card to the player's hand, then gets the sum of cards in hand.
         '''
         
         self.cards.append(card)
+
+        self.value += values[card.rank]
+
+        if card.rank == "Ace":
+            self.aces += 1
+
 
     def adjust_for_ace(self):
         '''
         Adjusts value of aces depending on total value of cards in hand.
         '''
         
-        pass
+        while self.value > 21 and self.aces:
+            self.value -= 10
+            self.aces -= 1
 
     def __str__(self):
 
-        return f"{self.cards[0].value}"
+        return f"{self.value}"
 
 class Chips:
 
+    '''
+    Keeps track of a player's total chips.
+    '''
+
     def __init__(self):
-        pass
+        
+        self.total = 100
+        self.bet = 0
 
     def win_bet(self):
-        pass
+        '''
+        Adds chips to player's total if they win.
+        '''
+
+        return self.bet*2 + self.total
 
     def lose_bet(self):
-        pass
+        '''
+        Removes chips from player's total if they lose.
+        '''
 
-testhand = Hand()
-testdeck = Deck()
-testdeck.shuffle()
+        return self.total - self.bet
 
-testhand.add_card(testdeck.deal())
-testhand.add_card(testdeck.deal())
-testhand.value
+def take_bet():
+    '''
+    Asks a player to enter a whole number less than or equal to their total.
+    '''
 
-print(testhand)
+    try:
+        bet = int(input("How much do you want to bet? : "))
+    except:
+        print("Must enter a whole number within range of your total chips. ")
