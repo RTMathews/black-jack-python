@@ -20,7 +20,7 @@ class Card:
         self.value = values[rank]
 
     def __str__(self):
-        return f"{self.rank} of {self.suit}"
+        return f"{self.rank} of {self.suit} {self.value}"
 
 class Deck:
 
@@ -70,22 +70,16 @@ class Hand:
         
         self.cards.append(card)
 
-    def sum_cards(self):
-        """
-        Gets the sum of all cards.
-        """
-
-        
-
     def adjust_for_ace(self):
         '''
         Adjusts value of aces depending on total value of cards in hand.
         '''
         
-
+        pass
 
     def __str__(self):
-        return f"{len(self.cards)}"
+
+        return f"{self.value}"
 
 class Chips:
 
@@ -100,7 +94,9 @@ class Chips:
 
 testhand = Hand()
 testdeck = Deck()
+testdeck.shuffle()
 
 testhand.add_card(testdeck.deal())
+testhand.sum_cards()
 
 print(testhand)
