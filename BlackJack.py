@@ -125,20 +125,39 @@ def take_bet(chips):
             chips.bet = int(input("How much do you want to bet? : "))
             if chips.bet <= chips.total:
                 return chips.bet
-        except:
+        except ValueError:
             print("Must enter a whole number within range of your total chips. ")
 
 def hit(deck,hand):
     '''
-    Asks the player if they want another card.
+    Deals a card and then checks if it's an ace.
     '''
 
     hand.add_card(deck.deal())
     hand.adjust_for_ace()
 
-testdeck = Deck()
-testdeck.shuffle()
+def hit_or_stand(deck,hand):
+    '''
+    Asks the player if they would like to hit or stand.
+    '''
 
-testhand = Hand()
-testhand.add_card(testdeck.deal())
-print(testhand)
+    global playing
+
+    while True:
+
+        is_hit = str(input("Would you like to hit or stand? (hit / stand): ")).lower
+        if is_hit == "hit":
+            return hit(deck,hand)
+        elif is_hit == "stand":
+            playing = False
+        else:
+            print("Please try again.")
+        break
+
+def show_some(player,dealer):
+    '''
+    Shows the player's cards and hides the dealer's first card.
+    '''
+
+    print(f"Player's hand: {player.cards[0:-1]}")
+    print(f"Dealer's hand: {dealer.cards[1:-1]}")
