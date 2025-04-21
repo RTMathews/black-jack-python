@@ -115,15 +115,30 @@ class Chips:
 
         return self.total - self.bet
 
-def take_bet():
+def take_bet(chips):
     '''
     Asks a player to enter a whole number less than or equal to their total.
     '''
     
     while True:
         try:
-            Chips().bet = int(input("How much do you want to bet? : "))
-            if Chips().bet <= Chips().total:
-                break
+            chips.bet = int(input("How much do you want to bet? : "))
+            if chips.bet <= chips.total:
+                return chips.bet
         except:
             print("Must enter a whole number within range of your total chips. ")
+
+def hit(deck,hand):
+    '''
+    Asks the player if they want another card.
+    '''
+
+    hand.add_card(deck.deal())
+    hand.adjust_for_ace()
+
+testdeck = Deck()
+testdeck.shuffle()
+
+testhand = Hand()
+testhand.add_card(testdeck.deal())
+print(testhand)
