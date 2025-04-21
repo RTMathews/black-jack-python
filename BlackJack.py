@@ -161,3 +161,11 @@ def show_some(player,dealer):
 
     print(f"Player's hand: {player.cards[0:-1]}")
     print(f"Dealer's hand: {dealer.cards[1:-1]}")
+
+def show_all(player,dealer):
+    '''
+    Shows all cards in player's and dealer's hand.
+    '''
+
+    print(f"Player's hand: {player.cards} Value: {player.value}")
+    print(f"Dealer's hand: {dealer.cards} Value: {player.value}")
