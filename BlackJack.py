@@ -189,12 +189,20 @@ def player_wins(player,dealer,chips):
 
     chips.win_bet()
 
-def dealer_wins():
+def dealer_wins(player,dealer,chips):
     '''
     If the dealer beats the player.
     '''
 
-def dealer_busts():
+    print("Dealer busts!")
+
+    chips.win_bet()
+
+def dealer_busts(player,dealer,chips):
     '''
     If the dealer goes over 21.
     '''
+
+    print("Dealer busts!")
+
+    chips.lose_bet()
