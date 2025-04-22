@@ -159,13 +159,42 @@ def show_some(player,dealer):
     Shows the player's cards and hides the dealer's first card.
     '''
 
-    print(f"Player's hand: {player.cards[0:-1]}")
-    print(f"Dealer's hand: {dealer.cards[1:-1]}")
+    print("Player's hand: ",*player.cards)
+    print(f"Dealer's hand: {dealer.cards[1]}")
 
 def show_all(player,dealer):
     '''
     Shows all cards in player's and dealer's hand.
     '''
 
-    print(f"Player's hand: {player.cards} Value: {player.value}")
+    print("Player's hand: ", *player.cards, f"Value: {player.value}")
     print(f"Dealer's hand: {dealer.cards} Value: {player.value}")
+
+def player_busts(player,dealer,chips):
+    '''
+    If the player goes over 21.
+    '''
+
+    print("Player busts!")
+
+    chips.lose_bet()
+
+
+def player_wins(player,dealer,chips):
+    '''
+    If the player beats the dealer.
+    '''
+
+    print("Player wins!")
+
+    chips.win_bet()
+
+def dealer_wins():
+    '''
+    If the dealer beats the player.
+    '''
+
+def dealer_busts():
+    '''
+    If the dealer goes over 21.
+    '''
