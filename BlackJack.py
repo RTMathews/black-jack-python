@@ -213,3 +213,15 @@ def push(player,dealer):
     '''
 
     print("Dealer and Player tie! it's a push.")
+
+while True:
+#Sets up the game creating and shuffling deck, ask how many chips the player has total, 
+#asks how much they would like to bet, deals 2 cards to player and dealer,
+#and shows cards except the dealer's first card.
+
+    deck = Deck()
+    deck.shuffle()
+
+    player_hand = Hand()
+    player_hand.add_card(deck.deal())
+    player_hand.add_card(deck.deal())
