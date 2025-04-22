@@ -229,3 +229,7 @@ while True:
     dealer_hand = Hand()
     dealer_hand.add_card(deck.deal())
     dealer_hand.add_card(deck.deal())
+
+    player_chips = Chips()
+
+    
