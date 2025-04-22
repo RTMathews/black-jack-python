@@ -8,6 +8,8 @@ ranks = ("Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
 values = {"Two":2, "Three":3, "Four":4, "Five":5, "Six":6, "Seven":7, "Eight":8, "Nine":9, "Ten":10,
         "Jack":10, "Queen":10, "King":10, "Ace":11}
 
+playing = True
+
 class Card:
     '''
     Gives a card all of its characteristics.
@@ -106,27 +108,33 @@ class Chips:
         Adds chips to player's total if they win.
         '''
 
-        return self.bet*2 + self.total
+        self.total += self.bet
 
     def lose_bet(self):
         '''
         Removes chips from player's total if they lose.
         '''
 
-        return self.total - self.bet
+        self.total -= self.bet
 
 def take_bet(chips):
     '''
     Asks a player to enter a whole number less than or equal to their total.
     '''
-    
+
     while True:
         try:
             chips.bet = int(input("How much do you want to bet? : "))
-            if chips.bet <= chips.total:
-                return chips.bet
+    
         except ValueError:
-            print("Must enter a whole number within range of your total chips. ")
+            print("Must enter a whole number. ")
+
+        else:
+            if chips.bet > chips.total:
+                print(f"Your bet can't exceed your total: {chips.total}")
+
+            else:
+                break
 
 def hit(deck,hand):
     '''
@@ -145,13 +153,15 @@ def hit_or_stand(deck,hand):
 
     while True:
 
-        is_hit = str(input("Would you like to hit or stand? (hit / stand): ")).lower
-        if is_hit == "hit":
-            return hit(deck,hand)
-        elif is_hit == "stand":
+        is_hit = input("Would you like to hit or stand? (hit / stand): ")
+        if is_hit.lower() == "hit":
+            hit(deck,hand)
+        elif is_hit.lower() == "stand":
+            print("Player stands.")
             playing = False
         else:
             print("Please try again.")
+            continue
         break
 
 def show_some(player,dealer):
@@ -168,7 +178,7 @@ def show_all(player,dealer):
     '''
 
     print("Player's hand: ", *player.cards, f"Value: {player.value}")
-    print(f"Dealer's hand: {dealer.cards} Value: {player.value}")
+    print("Dealer's hand: ", *dealer.cards, f"Value: {dealer.value}")
 
 def player_busts(player,dealer,chips):
     '''
@@ -194,9 +204,9 @@ def dealer_wins(player,dealer,chips):
     If the dealer beats the player.
     '''
 
-    print("Dealer busts!")
+    print("Dealer wins!")
 
-    chips.win_bet()
+    chips.lose_bet()
 
 def dealer_busts(player,dealer,chips):
     '''
@@ -205,7 +215,7 @@ def dealer_busts(player,dealer,chips):
 
     print("Dealer busts!")
 
-    chips.lose_bet()
+    chips.win_bet()
 
 def push(player,dealer):
     '''
@@ -213,6 +223,8 @@ def push(player,dealer):
     '''
 
     print("Dealer and Player tie! it's a push.")
+
+player_chips = Chips()
 
 while True:
 #Sets up the game creating and shuffling deck, ask how many chips the player has total, 
@@ -230,6 +242,46 @@ while True:
     dealer_hand.add_card(deck.deal())
     dealer_hand.add_card(deck.deal())
 
-    player_chips = Chips()
+    take_bet(player_chips)
 
+    show_some(player_hand,dealer_hand)
+
+    while playing:
+
+        hit_or_stand(deck,player_hand)
+
+        show_some(player_hand,dealer_hand)
+
+        if player_hand.value > 21:
+            player_busts(player_hand,dealer_hand,player_chips)
+            break
+
+    if player_hand.value <= 21:
+
+        while dealer_hand.value < 17:
+            dealer_hand.add_card(deck.deal())
+            
+        show_all(player_hand,dealer_hand)
+
+        if dealer_hand.value > 21:
+            dealer_busts(player_hand,dealer_hand,player_chips)
+            
+        elif player_hand.value > dealer_hand.value:
+            player_wins(player_hand,dealer_hand,player_chips)       
+
+        elif dealer_hand.value > player_hand.value:
+            dealer_wins(player_hand,dealer_hand,player_chips)
+
+        else:
+            push(player_hand,dealer_hand)
+
+    print(f"You have {player_chips.total} chips. ")
+
+    again = input("Would you like to play again? (y / n)")
     
+    if again.lower() == "y":
+        playing = True
+        continue
+    else:
+        break
+            
