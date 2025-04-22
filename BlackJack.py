@@ -206,3 +206,10 @@ def dealer_busts(player,dealer,chips):
     print("Dealer busts!")
 
     chips.lose_bet()
+
+def push(player,dealer):
+    '''
+    If a tie happens.
+    '''
+
+    print("Dealer and Player tie! it's a push.")
